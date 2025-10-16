@@ -1,6 +1,7 @@
 package Data_Driven_Testing_FD_Calculator;
 
 import org.testng.annotations.Test;
+import org.testng.annotations.Test;
 import java.io.IOException;
 import java.time.Duration;
 
@@ -45,15 +46,12 @@ public class FD_Calculator {
             String tenurePeriod = excelUtils.getCellData(file_Path, sheet_Name, r, 3);
             String frequency = excelUtils.getCellData(file_Path, sheet_Name, r, 4);
             String maturityValue = excelUtils.getCellData(file_Path, sheet_Name, r, 5);
-            System.out.println(maturityValue);
-
 
             // Passing above data into web application
             
             driver.findElement(By.xpath("//input[@name='principal']")).sendKeys(principal);
             driver.findElement(By.xpath("//input[@name='interest']")).sendKeys(rate);
             driver.findElement(By.xpath("//input[@name='tenure']")).sendKeys(period);
-            //driver.findElement(By.xpath("//select[@name='tenurePeriod']")).click();
 
             Select ten = new Select(driver.findElement(By.xpath("//select[@name='tenurePeriod']")));
             ten.selectByVisibleText(tenurePeriod);
@@ -67,7 +65,7 @@ public class FD_Calculator {
             //Data validation
             
             String matValue = driver.findElement(By.xpath("//span[@id ='resp_matval']//strong")).getText();
-            System.out.println(matValue);
+        
             if (Double.parseDouble(maturityValue) == Double.parseDouble(matValue)) {
                 excelUtils.setCellData(file_Path, sheet_Name, r, 7, "Passed");
                 excelUtils.setGreenColor(file_Path, sheet_Name, r, 7);
